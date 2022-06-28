@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="登录">
+    <van-nav-bar title="登录" @click-left="$router.back()">
       <van-icon name="cross" slot="left" />
       <!-- <template v-slot:left>
         <van-icon name="cross" />
@@ -68,7 +68,7 @@ export default {
   created () { },
   data () {
     return {
-      mobile: '13911111111', // 手机号
+      mobile: '13002555360', // 手机号
       code: '246810', // 短信验证码
       // time 属性表示倒计时总时长，单位为毫秒。
       time: 5 * 1000,
@@ -83,6 +83,7 @@ export default {
         // res.data.data
         // token有效期 2个小时 两种思路 让用户重新登录 refresh_token 拿一个新的token
         this.$store.commit('setUser', res.data.data)
+        this.$router.push({ name: 'my' })
       } catch (err) {
         console.log(err)
       }
