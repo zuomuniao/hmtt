@@ -17,3 +17,5 @@ margin 或 padding 挤一挤
 3. ajax 要看载荷 参数有没有传对 状态码
 
 先静后动 先布局再考虑 js
+
+哪些样式可以继承 color font 开头 line-开头

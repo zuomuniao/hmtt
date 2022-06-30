@@ -63,3 +63,5 @@ export const getUserInfo = () => {
 //   console.log(b)
 // }
 // fn({ a: 2, b: 3 })
+
+// 拦截器：一堆的ajax都要写的就可以提取到拦截器里面
