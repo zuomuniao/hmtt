@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 // 只有在vue组件文件中才能用this.$store 在js中没有这个this 所以只能
 import store from '@/store'
+
 /**
  * 获取短信验证码
  * @param {number} mobile
@@ -65,3 +66,9 @@ export const getUserInfo = () => {
 // fn({ a: 2, b: 3 })
 
 // 拦截器：一堆的ajax都要写的就可以提取到拦截器里面
+
+/**
+ * 刷新token
+ * @param {String} refreshToken - 保存的refresh_token
+ * @returns
+ */

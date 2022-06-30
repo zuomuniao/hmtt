@@ -1,5 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
+// import router from '@/router'
+
 const instance = axios.create({
   baseURL: 'http://toutiao.itheima.net/v1_0',
   timeout: 5000
@@ -27,7 +29,7 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
   return response
-}, function (error) {
+}, async function (error) {
   // 对响应错误做点什么
   return Promise.reject(error)
 })
