@@ -1,6 +1,10 @@
 <template>
   <van-cell-group>
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+    <van-pull-refresh
+      v-model="refreshing"
+      @refresh="onRefresh"
+      ref="pullrefresh"
+    >
       <van-list
         v-model="loading"
         :finished="finished"
@@ -21,6 +25,7 @@
 
 <script>
 import { getArticleList } from '@/api/home'
+let dom = null
 export default {
   name: 'ArticleList',
   props: {
@@ -38,7 +43,20 @@ export default {
       articleList: [],
       loading: false,
       finished: false,
-      refreshing: false
+      refreshing: false,
+      scrollTop: 0
+    }
+  },
+  mounted () {
+    dom = this.$refs.pullrefresh.$el
+    const that = this
+    dom.addEventListener('scroll', function () {
+      that.scrollTop = this.scrollTop
+    })
+  },
+  activated () {
+    if (dom) {
+      dom.scrollTop = this.scrollTop
     }
   },
   methods: {

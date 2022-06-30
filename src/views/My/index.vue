@@ -78,7 +78,6 @@ import { mapState } from 'vuex'
 export default {
   name: 'My',
   async created () {
-    console.log(111)
     if (this.user && this.user.token) {
       try {
         const res = await getUserInfo()

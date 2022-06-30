@@ -54,8 +54,10 @@ export default {
       active: 0,
       channels: [],
       isChannelPanelShow: false
+
     }
   },
+
   methods: {
     async getMyChannels () {
       try {
@@ -66,6 +68,7 @@ export default {
         console.log(err)
       }
     }
+
   },
   computed: {},
   watch: {},
