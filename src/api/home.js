@@ -31,3 +31,28 @@ export const getAllArticleList = () => {
     url: 'channels'
   })
 }
+
+/**
+ * 频道数据持久化
+ * @param {*} channels
+ * @returns
+ */
+export const saveChannels = (channels) => {
+  return request({
+    url: 'user/channels',
+    method: 'PUT',
+    data: {
+      channels
+    }
+  })
+}
+
+// get post put delete
+// get 获取
+// post 新增
+// delete 删除
+// put 修改
+// 语义化更强
+
+// get
+// post

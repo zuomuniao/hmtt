@@ -47,8 +47,13 @@
 </template>
 
 <script>
+// 频道的持久化逻辑
+// 1. 用户没有登录 在本地存储中
+// 2. 用户登录过 在服务器后台用ajax持久化
 import _ from 'lodash'
-import { getAllArticleList } from '@/api/home'
+import { setItem } from '@/utils/storage'
+import { getAllArticleList, saveChannels } from '@/api/home'
+const CHANNELS = 'CHANNELS'
 export default {
   name: 'ChannelPanel',
   props: {
@@ -85,6 +90,7 @@ export default {
     },
     onClick (index) {
       if (this.isCloseShow) {
+        if (index === 0) return// 推荐不能删除，所以要排除掉
         // 删除
         const obj = this.channels[index]
         this.channels.splice(index, 1)
@@ -99,7 +105,31 @@ export default {
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    channels: {
+      // 登录过 把持久化放在后台服务器（用ajax） 未登录 放本地存储
+      async handler (newVal) {
+        if (this.$store.state.user && this.$store.state.user.token) { // 登录过
+          console.log(123)
+          const arr = []
+          newVal.forEach((item, index) => {
+            arr.push({ id: item.id, seq: index })
+          })
+          console.log(arr)
+          // 先把频道数据处理一下
+          try {
+            const res = await saveChannels(arr)
+            console.log(res)
+          } catch (err) {
+            console.log(err)
+          }
+        } else { // 没有登录
+          setItem(CHANNELS, newVal)
+        }
+      },
+      deep: true // 深度监听
+    }
+  },
   filters: {},
   components: {}
 }

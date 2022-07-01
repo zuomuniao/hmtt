@@ -44,6 +44,8 @@
 import ChannelPanel from './components/ChannelPanel.vue'
 import ArticleList from '@/components/ArticleList.vue'
 import { getMyChannels } from '@/api/home'
+import { getItem } from '@/utils/storage'
+const CHANNELS = 'CHANNELS'
 export default {
   name: 'Home',
   created () {
@@ -54,24 +56,33 @@ export default {
       active: 0,
       channels: [],
       isChannelPanelShow: false
-
     }
   },
-
   methods: {
+    //     三种情况
+    // 1. 没有登录 第一次安装好app,第一次打开的时候 只能去ajax中拿
+    // 2. 没有登录，但是第二次打开，有可能频道被用编辑或删除过，这样的话，本地
+    // 存储就有值，从本地存储拿
+    // 3. 登录过 直接从ajax拿
+    // 先判断 token 如果有token 去ajax中拿 然后再判断本地存储有没有channels数据，如果没有 就从ajax中拿 否则从本地存储拿
+    // 只要本地存储有数据并且没有登录 就从本地存储中拿,否则从ajax拿
     async getMyChannels () {
-      try {
-        const res = await getMyChannels()
-        console.log('res', res)
-        this.channels = res.data.data.channels
-      } catch (err) {
-        console.log(err)
+      const channels = getItem(CHANNELS)
+      if (!(this.$store.state.user && this.$store.state.user.token) && channels) {
+        this.channels = channels
+      } else {
+        try {
+          const res = await getMyChannels()
+          this.channels = res.data.data.channels
+        } catch (err) {
+          console.log(err)
+        }
       }
     }
 
   },
   computed: {},
-  watch: {},
+
   filters: {},
   components: {
     ArticleList,
