@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar fixed>
       <template #title>
-        <van-button type="info" icon="search" class="search-btn"
+        <van-button type="info" icon="search" class="search-btn" to="/search"
           >搜索</van-button
         >
       </template>
@@ -66,6 +66,8 @@ export default {
     // 3. 登录过 直接从ajax拿
     // 先判断 token 如果有token 去ajax中拿 然后再判断本地存储有没有channels数据，如果没有 就从ajax中拿 否则从本地存储拿
     // 只要本地存储有数据并且没有登录 就从本地存储中拿,否则从ajax拿
+
+    // 没有登录并且本地存储有频道数据 就从本地拿频道数据，否则就发送ajax拿数据
     async getMyChannels () {
       const channels = getItem(CHANNELS)
       if (!(this.$store.state.user && this.$store.state.user.token) && channels) {

@@ -33,3 +33,27 @@ margin 或 padding 挤一挤
 内存 硬盘
 
 搜索是由三部分组成 : 搜索历史记录 不前搜索的关键字的相联想词列表 搜索结果 只会显示一个
+
+基础性架构性代码
+
+<book>
+   <bookname>三国</bookname>
+   <author>作者</author>
+</book>
+
+
+{
+   bookname:'三国',
+   author:'作者'A
+}
+
+
+
+data 英文 数据 -> data-一般是用来存数据
+<div myid="123"></div>
+
+第一点 第二点 
+
+1.先说这是什么东西
+2. 好处
+3. 使用场景 

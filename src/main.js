@@ -13,6 +13,8 @@ import MyIcon from '@/components/MyIcon.vue'
 
 // 一次性把filters/index.js中所有的按需要导出全部导出来
 // 作为obj的属性
+// 批量
+// 架构性的代码
 import * as obj from '@/filters'
 Object.keys(obj).forEach(key => {
   Vue.filter(key, obj[key])
@@ -20,7 +22,6 @@ Object.keys(obj).forEach(key => {
 
 Vue.config.productionTip = false
 Vue.component('MyIcon', MyIcon)
-console.log(obj)
 Vue.use(Vant)
 new Vue({
   router,

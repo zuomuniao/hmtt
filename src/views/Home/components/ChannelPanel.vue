@@ -110,6 +110,7 @@ export default {
       // 登录过 把持久化放在后台服务器（用ajax） 未登录 放本地存储
       async handler (newVal) {
         if (this.$store.state.user && this.$store.state.user.token) { // 登录过
+          // [{id:1,seq:索引值}]
           console.log(123)
           const arr = []
           newVal.forEach((item, index) => {
