@@ -56,3 +56,7 @@ data 英文 数据 -> data-一般是用来存数据
 
 url?id=100 $route.query.id
 url/100 $route.params.id
+
+$router.push('/article/110')
+$router.push({path:'/article/110'})
+$router.push({name:article,params:{id:110},query:{id:1110}})
