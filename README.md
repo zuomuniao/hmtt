@@ -41,19 +41,18 @@ margin 或 padding 挤一挤
    <author>作者</author>
 </book>
 
-
 {
-   bookname:'三国',
-   author:'作者'A
+bookname:'三国',
+author:'作者'A
 }
 
-
-
 data 英文 数据 -> data-一般是用来存数据
+
 <div myid="123"></div>
 
-第一点 第二点 
+第一点 第二点
 
-1.先说这是什么东西
-2. 好处
-3. 使用场景 
+1.先说这是什么东西 2. 好处 3. 使用场景
+
+url?id=100 $route.query.id
+url/100 $route.params.id

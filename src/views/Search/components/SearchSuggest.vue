@@ -1,12 +1,29 @@
 <template>
-  <div>搜索建议</div>
+  <div>
+    <van-cell
+      v-for="(item, index) in list"
+      :key="index"
+      icon="search"
+      @click="$emit('search', item)"
+    >
+      <template #title>
+        <span v-html="highlight(item)"></span>
+      </template>
+    </van-cell>
+  </div>
 </template>
 
 <script>
+// var a = 1
+// function fn(){
+//   return 123
+// }
+// var b = fn()
 // 响应式数据写在data，非响应式写在export default上面 这样性能高一点
 import { getSuggestList } from '@/api/search'
 let timer = null
 export default {
+  name: 'SearchSuggection',
   props: {
     searchText: {
       type: String,
@@ -21,7 +38,14 @@ export default {
       list: []
     }
   },
-  methods: {},
+  methods: {
+    // 因为这块要渲染的不是普通的字符串，而是html片段，所以必须要用v-html v-html是属性绑定，所以不能用过滤器
+    // 所以只能在methods中写
+    highlight (str) {
+      const reg = new RegExp(this.searchText, 'g')
+      return str.replace(reg, `<span style="color:red">${this.searchText}</span>`)
+    }
+  },
   computed: {},
   watch: {
     searchText: {
@@ -45,7 +69,13 @@ export default {
   beforeDestroy () {
     clearTimeout(timer)
   },
-  filters: {},
+  // 过滤器只能用于插值表达式
+  // filters: {
+  //   highlight (str, searchText) {
+  //     const reg = new RegExp(searchText, 'g')
+  //     return str.replace(reg, `<span style="color:red">${searchText}</span>`)
+  //   }
+  // },
   components: {}
 }
 </script>
