@@ -60,3 +60,6 @@ url/100 $route.params.id
 $router.push('/article/110')
 $router.push({path:'/article/110'})
 $router.push({name:article,params:{id:110},query:{id:1110}})
+
+props 是双向的
+<组件名 v-model="abc" :a.sync="a" :b.sync="b"></组件名>
