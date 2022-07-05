@@ -1,7 +1,12 @@
 <template>
   <div class="article-container">
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" left-arrow title="黑马头条"></van-nav-bar>
+    <van-nav-bar
+      class="page-nav-bar"
+      left-arrow
+      title="黑马头条"
+      @click-left="$router.back()"
+    ></van-nav-bar>
     <!-- /导航栏 -->
 
     <div class="main-wrap">
@@ -66,6 +71,7 @@
             :source="article.art_id"
             type="a"
             @set-count="count = $event"
+            :commentList="commentList"
           ></ArticleComment>
         </div>
         <!-- /加载完成-文章详情 -->
@@ -89,7 +95,12 @@
 
     <!-- 底部区域 -->
     <div class="article-bottom" v-if="!isLoading && !!article.art_id">
-      <van-button class="comment-btn" type="default" round size="small"
+      <van-button
+        class="comment-btn"
+        type="default"
+        round
+        size="small"
+        @click="addCommentShow = true"
         >写评论</van-button
       >
       <van-icon name="comment-o" :badge="count" color="#777" />
@@ -116,10 +127,22 @@
       title="立即分享给好友"
       :options="options"
     />
+    <!-- 在vue组件中，把一些和当前组件无关的不属于当前文档流中的东西放最后面 -->
+    <van-popup v-model="addCommentShow" position="bottom">
+      <AddComment
+        v-if="addCommentShow"
+        :target="article_id"
+        @add-comment="
+          commentList.unshift($event);
+          addCommentShow = false;
+        "
+      ></AddComment>
+    </van-popup>
   </div>
 </template>
 
 <script>
+import AddComment from './components/AddComment.vue'
 import ArticleComment from './components/ArticleComment.vue'
 import { ImagePreview } from 'vant'
 // 因为只有这块才需要用这个样式来渲染，所以没有必要在全局Main.js中引入
@@ -132,7 +155,7 @@ import { getArticle } from '@/api/article'
 
 export default {
   name: 'ArticleIndex',
-  components: { ArticleComment },
+  components: { ArticleComment, AddComment },
   props: {
     article_id: {
       type: [Number, String],
@@ -153,7 +176,9 @@ export default {
         { name: '分享海报', icon: 'poster' },
         { name: '二维码', icon: 'qrcode' }
       ],
-      count: null
+      count: null,
+      addCommentShow: false,
+      commentList: []
     }
   },
   computed: {},
