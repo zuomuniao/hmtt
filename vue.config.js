@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 module.exports = defineConfig({
-  publicPath: './',
+  publicPath: './', // 加这一行的目的是，如果不加，打包出来的路径是网络根路径的写法，加了这个之后，路径变成了相对路径
   transpileDependencies: true,
   chainWebpack: config => {
     config
