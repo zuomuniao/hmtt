@@ -13,7 +13,12 @@
       <p style="color: #363636">{{ item.content }}</p>
       <p>
         <span style="margin-right: 10px">{{ item.pubdate | dateformat }}</span>
-        <van-button size="mini" type="default">回复</van-button>
+        <van-button
+          size="mini"
+          type="default"
+          @click="$emit('replay-show', item)"
+          >回复</van-button
+        >
       </p>
     </div>
     <van-loading v-if="isLoading" />

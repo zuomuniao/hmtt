@@ -30,6 +30,10 @@ export default {
     target: {
       type: [String, Number],
       required: true
+    },
+    // 如果是对文章进行评论不用传 对评论进行评论要传
+    art_id: {
+      type: [String, Number]
     }
   },
   created () { },
@@ -43,7 +47,8 @@ export default {
       try {
         const res = await addComment({
           target: this.target,
-          content: this.message
+          content: this.message,
+          art_id: this.art_id
         })
         console.log(res)
         this.$emit('add-comment', res.data.data.new_obj)
