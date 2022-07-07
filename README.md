@@ -63,3 +63,7 @@ $router.push({name:article,params:{id:110},query:{id:1110}})
 
 props 是双向的
 <组件名 v-model="abc" :a.sync="a" :b.sync="b"></组件名>
+
+打包一下 -> 变成 app
+
+1. 项目写完了，我们就开始打包 yarn build 打包一下得到一个 dist，到时候把 dist 给公司后台

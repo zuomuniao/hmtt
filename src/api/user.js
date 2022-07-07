@@ -72,3 +72,45 @@ export const getUserInfo = () => {
  * @param {String} refreshToken - 保存的refresh_token
  * @returns
  */
+
+/**
+ *
+ * @returns 用户个人资料
+ */
+export const getUserProfile = () => {
+  return request({
+    url: 'user/profile'
+  })
+}
+
+// 获取 get
+// 添加 post
+// 删除 delete
+// 修改 put(完全覆盖) patch(部分替换)
+// get,delete -> params
+// put,patch,post -> data
+
+/**
+ *
+ * @param {对象 用户个人资料} profile
+ * @returns 更新用户个人资料
+ */
+export const updateUserProfile = profile => {
+  return request({
+    method: 'PATCH',
+    url: 'user/profile',
+    data: profile
+  })
+}
+
+/**
+ * 更新头像
+ * @param {裁剪之后的头像数据} data
+ */
+export const updateAvatar = data => {
+  return request({
+    method: 'PATCH',
+    url: 'user/photo',
+    data
+  })
+}
